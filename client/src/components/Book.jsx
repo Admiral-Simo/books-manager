@@ -1,7 +1,16 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useDeleteBookMutation } from "../redux/features/apiSlice";
+import { setCurrentBook } from "../redux/features/currentBookSlice";
 
 const Book = ({ id, cover, title, desc }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleUpdate = () => {
+    dispatch(setCurrentBook({ id, cover, title, desc }));
+    navigate("/update");
+  };
   const [deleteBook] = useDeleteBookMutation();
   return (
     <div className="shadow-lg bg-[#222] p-2 rounded-xl overflow-hidden">
@@ -16,7 +25,10 @@ const Book = ({ id, cover, title, desc }) => {
           >
             Delete
           </button>
-          <button className="py-2 px-5 bg-sky-500 font-semibold text-gray-black rounded-md">
+          <button
+            onClick={handleUpdate}
+            className="py-2 px-5 bg-sky-500 font-semibold text-gray-black rounded-md"
+          >
             Update
           </button>
         </div>

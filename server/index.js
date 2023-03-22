@@ -37,6 +37,15 @@ app.delete("/books", (req, res) => {
   });
 });
 
+app.patch("/books", (req, res) => {
+  const { id, title, desc, cover } = req.body;
+  const q = "UPDATE books SET `title` = ?, `desc` = ?, `cover` = ? WHERE id = ?";
+  db.query(q, [title, desc, cover, id], (err, rows) => {
+    if (err) return res.json(err);
+    return res.json(rows);
+  });
+});
+
 app.listen(5000, () => {
   console.log("listening on port 5000");
 });

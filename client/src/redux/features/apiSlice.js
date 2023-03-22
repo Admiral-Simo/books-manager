@@ -17,6 +17,14 @@ export const crudApi = createApi({
       }),
       invalidatesTags: ['Books'],
     }),
+    updateBook: builder.mutation({
+      query: (id) => ({
+        url: "/books",
+        method: "PATCH",
+        body: id,
+      }),
+      invalidatesTags: ['Books'],
+    }),
     deleteBook: builder.mutation({
       query: (id) => ({
         url: "/books",
@@ -28,4 +36,4 @@ export const crudApi = createApi({
   }),
 });
 
-export const { useGetBooksQuery, useAddBookMutation, useDeleteBookMutation } = crudApi;
+export const { useGetBooksQuery, useAddBookMutation, useDeleteBookMutation, useUpdateBookMutation } = crudApi;
